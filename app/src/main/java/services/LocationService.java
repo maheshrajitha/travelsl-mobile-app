@@ -1,6 +1,7 @@
 package services;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,11 +39,9 @@ public class LocationService {
 
     public List<LocationDto> getAllLocations(){
         final List<LocationDto> locationDtos = new ArrayList<LocationDto>();
-        final List<String> urlList = new ArrayList<String>();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, BASE_URL+"get-locations/", null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.v(TAG, response.toString());
                 if(response.length() > 0){
                     for (int i = 0 ; i < response.length() ; i ++){
                         try {
@@ -51,19 +50,21 @@ public class LocationService {
                             locationDto.setName(locationJsonObject.get("name").toString());
                             locationDto.setDescription(locationJsonObject.get("description").toString());
                             locationDto.setId(locationJsonObject.get("id").toString());
-                            urlList.clear();
+                            List<String> urlList = new ArrayList<String>();
                             for (int a = 0 ; a < locationJsonObject.getJSONArray("images").length() ; a ++){
-                                urlList.add(locationJsonObject.getJSONArray("images").get(a).toString().replace("\"",""));
+                                Log.i(TAG, "onResponse:"+locationJsonObject.getJSONArray("images").get(a).toString());
+                                urlList.add(locationJsonObject.getJSONArray("images").get(a).toString());
                             }
                             locationDto.setImages(urlList);
                             locationDtos.add(locationDto);
-                            locationRecyclerViewAdapter = new LocationRecyclerViewAdapter(activity,locationDtos);
-                            recyclerView.setAdapter(locationRecyclerViewAdapter);
-                            Log.i(TAG,""+recyclerView.getAdapter().getItemCount());
+                            //urlList.clear();
                         } catch (JSONException e) {
-                            Log.e(TAG , e.getMessage());
+                            Toast.makeText(activity,"Something Went Wrong",Toast.LENGTH_LONG).show();
                         }
                     }
+                    locationRecyclerViewAdapter = new LocationRecyclerViewAdapter(activity,locationDtos);
+                    Log.i(TAG, "onResponse:"+locationDtos.size());
+                    recyclerView.setAdapter(locationRecyclerViewAdapter);
                 }
             }
         }, new Response.ErrorListener() {
@@ -73,7 +74,7 @@ public class LocationService {
             }
         });
         Volley.newRequestQueue(activity).add(jsonArrayRequest);
-        Log.d(TAG,locationDtos.toString());
+        //Log.d(TAG,locationDtos.toString());
         return locationDtos;
     }
 }

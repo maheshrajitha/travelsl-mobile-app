@@ -1,6 +1,7 @@
 package util;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +36,10 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Log.i("LocationSer", "onBindViewHolder: "+locationDtoList.size());
         holder.getLocationNameTextView().setText(String.format("%s%s", locationDtoList.get(position).getName().substring(0, 1).toUpperCase(), locationDtoList.get(position).getName().substring(1)));
-        Picasso.get().load(locationDtoList.get(position).getImages().get(0).replace("\"","")).into(holder.getLocationImage());
+        Log.i("Picssa",locationDtoList.get(position).getImages().get(0));
+        Picasso.get().load(locationDtoList.get(position).getImages().get(0).replace("\"","").replace(" ","")).into(holder.getLocationImage());
     }
 
 

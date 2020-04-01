@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Travelsl</string>
+    <string name="username">Username</string>
+    <string name="viewOnMap">View On Map</string>
+    <string name="getWeatherInfo">Get Weather Information</string>
+    <string name="btnExplore">Explore</string>
+</resources>

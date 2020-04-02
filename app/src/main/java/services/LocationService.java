@@ -62,7 +62,7 @@ public class LocationService {
                             Toast.makeText(activity,"Something Went Wrong",Toast.LENGTH_LONG).show();
                         }
                     }
-                    locationRecyclerViewAdapter = new LocationRecyclerViewAdapter(activity,locationDtos);
+                    locationRecyclerViewAdapter = new LocationRecyclerViewAdapter(activity,locationDtos ,activity);
                     Log.i(TAG, "onResponse:"+locationDtos.size());
                     recyclerView.setAdapter(locationRecyclerViewAdapter);
                 }

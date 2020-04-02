@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -20,18 +21,19 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder
 
     private LayoutInflater layoutInflater;
     private List<LocationDto> locationDtoList;
+    private AppCompatActivity appCompatActivity;
 
-
-    public LocationRecyclerViewAdapter(Context context, List<LocationDto> locationDtoList) {
+    public LocationRecyclerViewAdapter(Context context, List<LocationDto> locationDtoList , AppCompatActivity appCompatActivity) {
         this.layoutInflater = LayoutInflater.from(context);
         this.locationDtoList = locationDtoList;
+        this.appCompatActivity = appCompatActivity;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.location_list,parent,false);
-        return new ViewHolder(view);
+        return new ViewHolder(view , appCompatActivity);
     }
 
     @Override

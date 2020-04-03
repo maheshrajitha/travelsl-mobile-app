@@ -55,15 +55,15 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/locationTemtTextView"
-                        android:layout_width="98dp"
-                        android:layout_height="53dp"
+                        android:id="@+id/locationTempTextView"
+                        android:layout_width="146dp"
+                        android:layout_height="54dp"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginStart="311dp"
-                        android:layout_marginTop="328dp"
+                        android:layout_marginStart="264dp"
+                        android:layout_marginTop="327dp"
                         android:layout_marginEnd="1dp"
                         android:layout_marginBottom="68dp"
                         android:text="30"
@@ -79,11 +79,10 @@
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginStart="242dp"
-                        android:layout_marginTop="321dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginBottom="66dp"
-                        app:srcCompat="@drawable/ic_launcher_foreground" />
+                        android:layout_marginStart="173dp"
+                        android:layout_marginTop="322dp"
+                        android:layout_marginEnd="89dp"
+                        android:layout_marginBottom="65dp" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -91,10 +90,19 @@
             <TextView
                 android:id="@+id/locationDescriptionTextView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="173dp"
                 android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaavvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccvvvvvvvv"
                 android:textColor="@color/appWhite"
                 android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnViewOnMap"
+                android:layout_width="267dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/secondary_rounded_button"
+                android:text="@string/viewOnMap"
+                android:textColor="@color/appWhite" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

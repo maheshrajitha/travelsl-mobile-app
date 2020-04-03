@@ -9,6 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
+import dtos.LocationDto;
 import lk.nsbm.travelsl.LocationActivity;
 import lk.nsbm.travelsl.R;
 
@@ -44,7 +47,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     private ImageView locationImage;
 
-    public ViewHolder(@NonNull final View itemView , final AppCompatActivity appCompatActivity) {
+    public ViewHolder(@NonNull final View itemView , final List<LocationDto> locationDtos) {
         super(itemView);
         locationNameTextView = itemView.findViewById(R.id.locationNameTextView);
         locationImage = itemView.findViewById(R.id.locationImage);
@@ -53,7 +56,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                appCompatActivity.startActivity(new Intent(appCompatActivity, LocationActivity.class).putExtra("locationId",locationIdTextView.getText().toString()));
+                view.getContext().startActivity(new Intent(view.getContext(), LocationActivity.class).putExtra("locationId",locationDtos.get(getAdapterPosition()).getId()));
             }
         });
     }

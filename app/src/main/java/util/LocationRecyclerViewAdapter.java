@@ -21,19 +21,17 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder
 
     private LayoutInflater layoutInflater;
     private List<LocationDto> locationDtoList;
-    private AppCompatActivity appCompatActivity;
 
-    public LocationRecyclerViewAdapter(Context context, List<LocationDto> locationDtoList , AppCompatActivity appCompatActivity) {
+    public LocationRecyclerViewAdapter(Context context, List<LocationDto> locationDtoList) {
         this.layoutInflater = LayoutInflater.from(context);
         this.locationDtoList = locationDtoList;
-        this.appCompatActivity = appCompatActivity;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.location_list,parent,false);
-        return new ViewHolder(view , appCompatActivity);
+        return new ViewHolder(view , locationDtoList);
     }
 
     @Override
@@ -42,6 +40,7 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder
         holder.getLocationNameTextView().setText(String.format("%s%s", locationDtoList.get(position).getName().substring(0, 1).toUpperCase(), locationDtoList.get(position).getName().substring(1)));
         Log.i("Picssa",locationDtoList.get(position).getImages().get(0));
         Picasso.get().load(locationDtoList.get(position).getImages().get(0).replace("\"","").replace(" ","")).into(holder.getLocationImage());
+
     }
 
 

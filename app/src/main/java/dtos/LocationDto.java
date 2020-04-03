@@ -10,6 +10,15 @@ public class LocationDto {
     private String name;
     private List<String> images;
     private String description;
+    private String city;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public String getId() {
         return id;

@@ -34,8 +34,14 @@
                         android:id="@+id/locationImageView"
                         android:layout_width="351dp"
                         android:layout_height="284dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="131dp"
+                        android:layout_marginStart="34dp"
+                        android:layout_marginTop="35dp"
+                        android:layout_marginEnd="27dp"
+                        android:layout_marginBottom="130dp"
                         app:srcCompat="@drawable/ic_app_logo" />
 
                     <TextView

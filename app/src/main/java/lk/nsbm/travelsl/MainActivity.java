@@ -7,21 +7,35 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import org.json.JSONException;
+
+import services.AuthService;
 
 public class MainActivity extends AppCompatActivity {
 
 
-    private Button btnExplore;
+    private Button btnLogin;
+    private AuthService authService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.btnExplore = findViewById(R.id.btnExplore);
-        this.btnExplore.setOnClickListener(new View.OnClickListener() {
+        authService = new AuthService(this.getApplication());
+        btnLogin =  findViewById(R.id.btnLogin);
+        final EditText editTextEmail = findViewById(R.id.editTextEmail);
+        final EditText editTextPassword = findViewById(R.id.editTextPassword);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,LocationListActivity.class));
-                finish();
+                try {
+                    authService.login(editTextEmail.getText().toString() , editTextPassword.getText().toString());
+                } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

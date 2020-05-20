@@ -4,6 +4,9 @@
     <string name="viewOnMap">View On Map</string>
     <string name="getWeatherInfo">Get Weather Information</string>
     <string name="btnExplore">Explore</string>
+    <string name="btnLogin">Login</string>
     <string name="allLocations">All Locations</string>
+    <string name="typePassword">Type Your Password</string>
+    <string name="typeEmail">Type Email Address</string>
     <string name="mapbox_access_token">pk.eyJ1IjoibWFoZXNoLXJhaml0aGEiLCJhIjoiY2s3Y2EyNG0zMGt2azNrbXI3MGhobGsyYiJ9.L5blu4mfiCDmlpcRsR9MVw</string>
 </resources>

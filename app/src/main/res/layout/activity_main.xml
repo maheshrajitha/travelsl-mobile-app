@@ -7,43 +7,69 @@
     android:background="@color/appDarkColor"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/txtViewAppName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/acme"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textColor="@color/appWhite"
-        android:textSize="30sp"
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btnExplore"
-        android:layout_width="232dp"
-        android:layout_height="39dp"
-        android:background="@drawable/rounded_primary_button"
-        android:text="@string/btnExplore"
-        android:textColor="@color/appWhite"
-        android:elevation="@android:dimen/thumbnail_height"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.932" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imgAppLogo"
-        android:layout_width="161dp"
-        android:layout_height="120dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.165"
-        android:src="@drawable/ic_app_logo" />
+            <ImageView
+                android:id="@+id/appLogo"
+                android:layout_width="match_parent"
+                android:layout_height="136dp"
+                app:srcCompat="@drawable/ic_app_logo" />
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/rounded_transparent_text_field"
+                android:ems="10"
+                android:hint="@string/typeEmail"
+                android:inputType="textEmailAddress"
+                android:textAlignment="center"
+                android:textColor="@color/appWhite"
+                android:textColorHint="@android:color/white" />
+
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/rounded_transparent_text_field"
+                android:ems="10"
+                android:hint="@string/typePassword"
+                android:inputType="textPassword"
+                android:textAlignment="center"
+                android:textColor="@color/appWhite"
+                android:textColorHint="@color/appWhite" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:background="@drawable/rounded_primary_button"
+                android:text="@string/btnLogin"
+                android:textColor="@color/appWhite" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/secondary_rounded_button"
+                android:text="Button" />
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

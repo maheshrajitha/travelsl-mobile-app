@@ -1,7 +1,9 @@
 package util;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,11 +49,14 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     private ImageView locationImage;
 
+    private ImageButton btnAddToFavourites;
+
     public ViewHolder(@NonNull final View itemView , final List<LocationDto> locationDtos) {
         super(itemView);
         locationNameTextView = itemView.findViewById(R.id.locationNameTextView);
         locationImage = itemView.findViewById(R.id.locationImage);
         locationIdTextView = itemView.findViewById(R.id.locationIdTextView);
+        btnAddToFavourites= itemView.findViewById(R.id.btnAddToFavourites);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +64,13 @@ public class ViewHolder extends RecyclerView.ViewHolder {
                 view.getContext().startActivity(new Intent(view.getContext(), LocationActivity.class).putExtra("locationId",locationDtos.get(getAdapterPosition()).getId()));
             }
         });
+
+//        btnAddToFavourites.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.i("Location",itemView.getSh)
+//            }
+//        });
     }
 
 

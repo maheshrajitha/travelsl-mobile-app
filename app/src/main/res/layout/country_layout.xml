@@ -26,69 +26,55 @@
             tools:layout_editor_absoluteY="-1dp">
 
             <ImageView
-                android:id="@+id/locationImage"
-                android:layout_width="match_parent"
+                android:id="@+id/countryImage"
+                android:layout_width="328dp"
                 android:layout_height="358dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.44"
+                app:layout_constraintHorizontal_bias="0.489"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.383" />
+                app:layout_constraintVertical_bias="0.348" />
 
             <TextView
-                android:id="@+id/locationNameTextView"
+                android:id="@+id/countryNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="VenueName"
-                android:textColor="@color/appBlack"
+                android:text="Country Name"
+                android:textColor="@color/appDarkColor"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.306"
+                app:layout_constraintHorizontal_bias="0.092"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.03" />
 
-            <ImageView
-                android:id="@+id/locationIndicatorImageView"
-                android:layout_width="57dp"
-                android:layout_height="39dp"
-                android:src="@drawable/travel"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.047"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.031"
-                tools:srcCompat="@drawable/travel" />
-
             <TextView
-                android:id="@+id/locationIdTextView"
+                android:id="@+id/countryIdTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.866"
+                app:layout_constraintHorizontal_bias="0.69"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.936" />
+                app:layout_constraintVertical_bias="0.867" />
 
             <ImageButton
-                android:id="@+id/btnAddToFavourites"
-                android:layout_width="42dp"
-                android:layout_height="29dp"
-                android:scaleType="fitCenter"
+                android:id="@+id/btnCountryAddToFavourites"
+                android:layout_width="29dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
                 android:background="@android:color/transparent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/locationImage"
-                app:layout_constraintHorizontal_bias="0.043"
+                app:layout_constraintHorizontal_bias="0.944"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.865"
+                app:layout_constraintVertical_bias="0.846"
                 app:srcCompat="@drawable/ic_favorite" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

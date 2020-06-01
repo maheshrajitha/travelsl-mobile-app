@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        authService = new AuthService(this.getApplication());
+        authService = new AuthService(this);
         btnLogin =  findViewById(R.id.btnLogin);
         final EditText editTextEmail = findViewById(R.id.editTextEmail);
         final EditText editTextPassword = findViewById(R.id.editTextPassword);
@@ -33,8 +33,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     authService.login(editTextEmail.getText().toString() , editTextPassword.getText().toString());
+
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
                 }
             }
         });

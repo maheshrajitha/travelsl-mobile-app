@@ -1,9 +1,9 @@
 package services;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,12 +13,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -37,7 +37,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import dtos.LocationDto;
@@ -51,7 +53,7 @@ public class LocationService {
     private RecyclerView recyclerView;
 
     private static final String TAG = "LocationServicesClass";
-    private static final String BASE_URL = "http://10.0.2.2:8000/locations/";
+    private static final String BASE_URL = "http://10.0.2.2:8000/location/";
 
     public LocationService(AppCompatActivity activity , @Nullable RecyclerView recyclerView) {
         this.activity = activity;
@@ -61,7 +63,7 @@ public class LocationService {
 
     public List<LocationDto> getAllLocations(){
         final List<LocationDto> locationDtos = new ArrayList<LocationDto>();
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, BASE_URL+"get-locations/", null, new Response.Listener<JSONArray>() {
+        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, BASE_URL, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 if(response.length() > 0){
@@ -69,14 +71,10 @@ public class LocationService {
                         try {
                             JSONObject locationJsonObject = response.getJSONObject(i);
                             LocationDto locationDto = new LocationDto();
-                            locationDto.setName(locationJsonObject.get("name").toString());
-                            locationDto.setDescription(locationJsonObject.get("description").toString());
+                            locationDto.setName(locationJsonObject.get("city").toString());
+                            //locationDto.setDescription(locationJsonObject.get("description").toString());
                             locationDto.setId(locationJsonObject.get("id").toString());
-                            List<String> urlList = new ArrayList<String>();
-                            for (int a = 0 ; a < locationJsonObject.getJSONArray("images").length() ; a ++){
-                                urlList.add(locationJsonObject.getJSONArray("images").get(a).toString());
-                            }
-                            locationDto.setImages(urlList);
+                            locationDto.setImage(locationJsonObject.get("image").toString());
                             locationDtos.add(locationDto);
                             //urlList.clear();
                         } catch (JSONException e) {
@@ -95,7 +93,15 @@ public class LocationService {
                 Toast.makeText(activity,"Something Went Wrong",Toast.LENGTH_LONG).show();
                 //Log.e(TAG,error.getMessage());
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String , String> headers = new HashMap<>();
+                headers.put("Authorization","Bearer "+activity.getSharedPreferences("user", Context.MODE_PRIVATE).getString("authToken",""));
+                headers.put("Accept","application/json");
+                return headers;
+            }
+        };
         Volley.newRequestQueue(activity).add(jsonArrayRequest);
         //Log.d(TAG,locationDtos.toString());
         return locationDtos;

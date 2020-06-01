@@ -8,7 +8,7 @@ public class LocationDto {
      * */
     private String id;
     private String name;
-    private List<String> images;
+    private String image;
     private String description;
     private String city;
 
@@ -36,12 +36,12 @@ public class LocationDto {
         this.name = name;
     }
 
-    public List<String> getImages() {
-        return images;
+    public String getImages() {
+        return image;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getDescription() {

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/locationsTab" android:title="@string/navigationLocationsTab" android:icon="@drawable/ic_places"/>
+    <item android:id="@+id/countriesTab" android:title="@string/navigationCountriesTab" android:icon="@drawable/ic_countries"/>
+    <item android:id="@+id/favouritesTab" android:title="@string/navigationFavouritesTab" android:icon="@drawable/ic_favorite"/>
+</menu>

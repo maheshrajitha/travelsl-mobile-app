@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appDarkColor"
     tools:context=".MainActivity">
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,46 +26,48 @@
                 android:id="@+id/appLogo"
                 android:layout_width="match_parent"
                 android:layout_height="136dp"
-                app:srcCompat="@drawable/ic_app_logo" />
+                android:layout_marginBottom="50dp"
+                app:srcCompat="@drawable/location" />
 
             <EditText
                 android:id="@+id/editTextEmail"
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/rounded_transparent_text_field"
+                android:background="@drawable/shadow_edit_text"
                 android:ems="10"
                 android:hint="@string/typeEmail"
                 android:inputType="textEmailAddress"
                 android:textAlignment="center"
-                android:textColor="@color/appWhite"
-                android:textColorHint="@android:color/white" />
+                android:textColor="@color/appBlack"
+                android:textColorHint="@color/appBlack" />
 
             <EditText
                 android:id="@+id/editTextPassword"
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/rounded_transparent_text_field"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_margin="30dp"
+                android:background="@drawable/shadow_edit_text"
                 android:ems="10"
                 android:hint="@string/typePassword"
                 android:inputType="textPassword"
                 android:textAlignment="center"
-                android:textColor="@color/appWhite"
-                android:textColorHint="@color/appWhite" />
+                android:textColor="@color/appBlack"
+                android:textColorHint="@color/appBlack" />
 
             <Button
                 android:id="@+id/btnLogin"
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/rounded_primary_button"
                 android:text="@string/btnLogin"
                 android:textColor="@color/appWhite" />
 
             <Button
                 android:id="@+id/button4"
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/secondary_rounded_button"
                 android:text="Button" />

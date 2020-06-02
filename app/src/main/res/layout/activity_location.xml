@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appDarkColor"
     tools:context=".LocationActivity">
 
 
@@ -20,95 +19,86 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
+
+            <ImageView
+                android:id="@+id/locationImageView"
                 android:layout_width="match_parent"
-                android:layout_height="449dp"
-               >
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:background="@color/appDarkColor"
-                    android:layout_height="match_parent">
+                android:layout_height="500dp"
+                app:srcCompat="@drawable/location" />
 
-                    <ImageView
-                        android:id="@+id/locationImageView"
-                        android:layout_width="351dp"
-                        android:layout_height="284dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginStart="34dp"
-                        android:layout_marginTop="35dp"
-                        android:layout_marginEnd="27dp"
-                        android:layout_marginBottom="130dp"
-                        app:srcCompat="@drawable/ic_app_logo" />
+            <Button
+                android:id="@+id/btnViewOnMap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="50dp"
+                android:background="@drawable/secondary_rounded_button"
+                android:text="@string/viewOnMap"
+                android:textColor="@android:color/white" />
 
-                    <TextView
-                        android:id="@+id/locationNameTextView"
-                        android:layout_width="214dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="173dp"
-                        android:layout_marginBottom="79dp"
-                        android:text="Location Name"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/appWhite"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                >
 
-                    <TextView
-                        android:id="@+id/locationTempTextView"
-                        android:layout_width="146dp"
-                        android:layout_height="54dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginStart="264dp"
-                        android:layout_marginTop="327dp"
-                        android:layout_marginEnd="1dp"
-                        android:layout_marginBottom="68dp"
-                        android:text="30"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/appWhite"
-                        android:textSize="30sp" />
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="83dp"
+                    android:layout_height="43dp"
+                    app:srcCompat="@drawable/ic_places" />
 
-                    <ImageView
-                        android:id="@+id/locationWeatherImageView"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginStart="173dp"
-                        android:layout_marginTop="322dp"
-                        android:layout_marginEnd="89dp"
-                        android:layout_marginBottom="65dp" />
+                <TextView
+                    android:id="@+id/locationNameTextView"
+                    android:layout_width="146dp"
+                    android:layout_height="match_parent"
+                    android:text="TextView" />
 
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_marginBottom="10dp" >
+
+                <ImageView
+                    android:id="@+id/imageView12"
+                    android:layout_width="83dp"
+                    android:layout_height="43dp"
+                    app:srcCompat="@drawable/ic_baseline_local_airport_24" />
+
+                <TextView
+                    android:id="@+id/txtNearestAirport"
+                    android:layout_width="151dp"
+                    android:layout_height="match_parent"
+                    android:text="TextView" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_marginBottom="20dp" >
+
+                <ImageView
+                    android:id="@+id/imageView13"
+                    android:layout_width="83dp"
+                    android:layout_height="43dp"
+                    app:srcCompat="@drawable/ic_baseline_wb_cloudy_24" />
+
+                <TextView
+                    android:id="@+id/locationTempTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="TextView" />
+            </TableRow>
 
             <TextView
                 android:id="@+id/locationDescriptionTextView"
                 android:layout_width="match_parent"
-                android:layout_height="173dp"
-                android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaavvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccvvvvvvvv"
-                android:textColor="@color/appWhite"
-                android:textSize="14sp" />
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
-            <Button
-                android:id="@+id/btnViewOnMap"
-                android:layout_width="267dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@drawable/secondary_rounded_button"
-                android:text="@string/viewOnMap"
-                android:textColor="@color/appWhite" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

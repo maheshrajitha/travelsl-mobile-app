@@ -36,6 +36,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -110,15 +111,17 @@ public class LocationService {
     public void getLocationById(String locationId){
         final TextView locationName = activity.findViewById(R.id.locationNameTextView);
         final ImageView locationImageView = activity.findViewById(R.id.locationImageView);
-        final TextView locationDescriptionTextView = activity.findViewById(R.id.locationDescriptionTextView);
-        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, BASE_URL +"get-by-id/"+ locationId, null, new Response.Listener<JSONObject>() {
+        final TextView txttNearestAirPort = activity.findViewById(R.id.txtNearestAirport);
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, BASE_URL + locationId, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    locationName.setText(response.getString("name"));
-                    Picasso.get().load(response.getJSONArray("images").getString(0)).into(locationImageView);
-                    locationDescriptionTextView.setText(response.getString("description"));
+                    Log.i(TAG , response.toString());
+                    locationName.setText(response.getString("city"));
+                    Picasso.get().load(response.getString("image")).into(locationImageView);
+                    txttNearestAirPort.setText(response.getString("nearestAirport"));
                     getWeatherInfromation(response.getString("city"));
+                    getLocationWikipediaData(response.getString("city"));
                 } catch (JSONException e) {
                     Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
@@ -128,22 +131,27 @@ public class LocationService {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(activity , "Something Went Wrong",Toast.LENGTH_LONG).show();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String , String> headers = new HashMap<>();
+                headers.put("Accept","application/json");
+                headers.put("Authorization","Bearer "+activity.getSharedPreferences("user", Context.MODE_PRIVATE).getString("authToken",""));
+                return headers;
+            }
+        };
         Volley.newRequestQueue(activity).add(jsonObjectRequest);
     }
 
-    private void getWeatherInfromation(String city){
-        final ImageView locationWeatherImageView = activity.findViewById(R.id.locationWeatherImageView);
-        final TextView locationTempTextView = activity.findViewById(R.id.locationTempTextView);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, BASE_URL+"get-location-weather/"+city, null, new Response.Listener<JSONObject>() {
+    private void getLocationWikipediaData(String locationName){
+        final TextView locationDescriptionTextView = activity.findViewById(R.id.locationDescriptionTextView);
+        JsonObjectRequest wikipediaApiRequest = new JsonObjectRequest(Request.Method.GET, "https://en.wikipedia.org/api/rest_v1/page/summary/" + locationName, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
-                try{
-                    Log.i("LocationService", "onResponse: "+response.getString("icon").replace("\"",""));
-                    locationTempTextView.setText(response.getString("temp"));
-                    Picasso.get().load(response.getString("icon").replace("\"","")).into(locationWeatherImageView);
-                }catch(JSONException e){
+                try {
+                    locationDescriptionTextView.setText(response.getString("extract"));
+                    Log.i(TAG,response.getString("extract"));
+                } catch (JSONException e) {
                     Toast.makeText(activity , "Something Went Wrong",Toast.LENGTH_LONG).show();
                 }
             }
@@ -153,33 +161,70 @@ public class LocationService {
                 Toast.makeText(activity , "Something Went Wrong",Toast.LENGTH_LONG).show();
             }
         });
+        Volley.newRequestQueue(activity).add(wikipediaApiRequest);
+    }
+
+    private void getWeatherInfromation(String city){
+        //final ImageView locationWeatherImageView = activity.findViewById(R.id.locationWeatherImageView);
+        final TextView locationTempTextView = activity.findViewById(R.id.locationTempTextView);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, BASE_URL+"weather/"+city, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                Log.i("LocationService", response.toString());
+                try{
+
+                    locationTempTextView.setText(response.getString("temprature"));
+                    //Picasso.get().load(response.getString("icon").replace("\"","")).into(locationWeatherImageView);
+                }catch(JSONException e){
+                    Toast.makeText(activity , "Something Went Wrong",Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG,error.getMessage());
+                Toast.makeText(activity , "Something Went Wrong",Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String , String> headers = new HashMap<>();
+                headers.put("Accept","application/json");
+                headers.put("Authorization","Bearer "+activity.getSharedPreferences("user", Context.MODE_PRIVATE).getString("authToken",""));
+                return headers;
+            }
+        };
         Volley.newRequestQueue(activity).add(jsonObjectRequest);
     }
 
     public void getCordinates(final String city , final MapView mapView){
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, BASE_URL+"get-cordinates/"+city, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, BASE_URL+"get-coords/"+city, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(final JSONObject response) {
                 Log.i("ViewOnMapActivity", "onResponse: "+response.toString());
                 mapView.getMapAsync(new OnMapReadyCallback() {
                     @Override
                     public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+                        final DecimalFormat decimalFormat = new DecimalFormat("#.##");
                         mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
                             @Override
                             public void onStyleLoaded(@NonNull Style style) {
                                 SymbolManager symbolManager = new SymbolManager(mapView , mapboxMap ,style);
                                 symbolManager.setIconAllowOverlap(true);
                                 symbolManager.setIconIgnorePlacement(true);
-                                Bitmap marker = BitmapFactory.decodeResource(activity.getResources(),R.drawable.location_indicator);
+                                Bitmap marker = BitmapFactory.decodeResource(activity.getResources(),R.drawable.mapbox_marker_icon_default);
                                 Objects.requireNonNull(mapboxMap.getStyle()).addImage("marker",marker);
                                 try {
-                                    Symbol symbol = symbolManager.create(new SymbolOptions().withLatLng(new LatLng(response.getDouble("lat"), response.getDouble("long")))
+                                    Log.i(TAG,response.getDouble("lat")+"");
+                                    Symbol symbol = symbolManager.create(new SymbolOptions().withLatLng(new LatLng(Double.parseDouble(decimalFormat.format(response.getDouble("lat"))), Double.parseDouble(decimalFormat.format(response.getDouble("long")))))
                                             .withIconImage("marker").withIconSize(2.0f).withTextField(city).withTextColor("white")
                                     );
-                                    CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(response.getDouble("lat"), response.getDouble("long")))
+                                    CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(Double.parseDouble(decimalFormat.format(response.getDouble("lat"))), Double.parseDouble(decimalFormat.format(response.getDouble("long")))))
                                             .zoom(10).bearing(360).tilt(0).build();
                                     mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition),7000);
                                 } catch (JSONException e) {
+                                    Log.e(TAG,"JSON Error");
                                     Toast.makeText(activity , "Something Went Wrong",Toast.LENGTH_LONG).show();
                                 }
                             }
@@ -190,9 +235,18 @@ public class LocationService {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.e(TAG,error.getMessage());
                 Toast.makeText(activity , "Something Went Wrong",Toast.LENGTH_LONG).show();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String , String> headers = new HashMap<>();
+                headers.put("Accept","application/json");
+                headers.put("Authorization","Bearer "+activity.getSharedPreferences("user", Context.MODE_PRIVATE).getString("authToken",""));
+                return headers;
+            }
+        };
         Volley.newRequestQueue(activity).add(jsonObjectRequest);
     }
 }

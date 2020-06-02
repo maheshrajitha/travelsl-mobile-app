@@ -11,6 +11,15 @@ public class LocationDto {
     private String image;
     private String description;
     private String city;
+    private String nearestAirport;
+
+    public String getNearestAirport() {
+        return nearestAirport;
+    }
+
+    public void setNearestAirport(String nearestAirport) {
+        this.nearestAirport = nearestAirport;
+    }
 
     public String getCity() {
         return city;

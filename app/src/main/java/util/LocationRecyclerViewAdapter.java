@@ -21,17 +21,19 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder
 
     private LayoutInflater layoutInflater;
     private List<LocationDto> locationDtoList;
+    private Context context;
 
     public LocationRecyclerViewAdapter(Context context, List<LocationDto> locationDtoList) {
         this.layoutInflater = LayoutInflater.from(context);
         this.locationDtoList = locationDtoList;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.location_list,parent,false);
-        return new ViewHolder(view , locationDtoList);
+        return new ViewHolder(view , locationDtoList , context);
     }
 
     @Override

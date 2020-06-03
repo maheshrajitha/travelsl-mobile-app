@@ -73,11 +73,9 @@ public class LocationService {
                             JSONObject locationJsonObject = response.getJSONObject(i);
                             LocationDto locationDto = new LocationDto();
                             locationDto.setName(locationJsonObject.get("city").toString());
-                            //locationDto.setDescription(locationJsonObject.get("description").toString());
                             locationDto.setId(locationJsonObject.get("id").toString());
                             locationDto.setImage(locationJsonObject.get("image").toString());
                             locationDtos.add(locationDto);
-                            //urlList.clear();
                         } catch (JSONException e) {
                             Log.i("LocationService",e.toString());
                             Toast.makeText(activity,"Something Went Wrong",Toast.LENGTH_LONG).show();
@@ -92,7 +90,6 @@ public class LocationService {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(activity,"Something Went Wrong",Toast.LENGTH_LONG).show();
-                //Log.e(TAG,error.getMessage());
             }
         }){
             @Override
@@ -104,7 +101,6 @@ public class LocationService {
             }
         };
         Volley.newRequestQueue(activity).add(jsonArrayRequest);
-        //Log.d(TAG,locationDtos.toString());
         return locationDtos;
     }
 
@@ -150,7 +146,6 @@ public class LocationService {
             public void onResponse(JSONObject response) {
                 try {
                     locationDescriptionTextView.setText(response.getString("extract"));
-                    Log.i(TAG,response.getString("extract"));
                 } catch (JSONException e) {
                     Toast.makeText(activity , "Something Went Wrong",Toast.LENGTH_LONG).show();
                 }
@@ -165,7 +160,6 @@ public class LocationService {
     }
 
     private void getWeatherInfromation(String city){
-        //final ImageView locationWeatherImageView = activity.findViewById(R.id.locationWeatherImageView);
         final TextView locationTempTextView = activity.findViewById(R.id.locationTempTextView);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, BASE_URL+"weather/"+city, null, new Response.Listener<JSONObject>() {
             @Override
@@ -183,7 +177,6 @@ public class LocationService {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG,error.getMessage());
                 Toast.makeText(activity , "Something Went Wrong",Toast.LENGTH_LONG).show();
             }
         }){
@@ -235,7 +228,6 @@ public class LocationService {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG,error.getMessage());
                 Toast.makeText(activity , "Something Went Wrong",Toast.LENGTH_LONG).show();
             }
         }){

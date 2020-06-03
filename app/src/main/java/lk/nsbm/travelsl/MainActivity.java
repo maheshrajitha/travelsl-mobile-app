@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnLogin;
     private AuthService authService;
+    private EditText editTextEmail;
+    private EditText editTextPassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +29,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         authService = new AuthService(this);
         btnLogin =  findViewById(R.id.btnLogin);
-        final EditText editTextEmail = findViewById(R.id.editTextEmail);
-        final EditText editTextPassword = findViewById(R.id.editTextPassword);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextPassword = findViewById(R.id.editTextPassword);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -13,6 +13,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -34,12 +35,17 @@ public class UserService {
     private RecyclerView favouriteLocationsRecyclerView;
     private FavouriteLocationRecyclerViewAdapter favouriteLocationRecyclerViewAdapter;
 
+    private Context context;
     private static final String BASE_URL = "http://10.0.2.2:8000/location/";
 
     public UserService(AppCompatActivity appCompatActivity){
         this.appCompatActivity = appCompatActivity;
         this.favouriteLocationsRecyclerView = appCompatActivity.findViewById(R.id.favouriteLocationListRecyclerView);
         this.favouriteLocationsRecyclerView.setLayoutManager(new LinearLayoutManager(appCompatActivity));
+    }
+
+    public UserService (Context context){
+        this.context = context;
     }
 
     public void getAllFavouriteLocations(){
@@ -83,5 +89,34 @@ public class UserService {
             }
         };
         Volley.newRequestQueue(appCompatActivity).add(jsonArrayRequest);
+    }
+
+    public void addToFavourites(String locationId){
+        try{
+            JSONObject favouriteLocationJson = new JSONObject();
+            favouriteLocationJson.put("locationId",locationId);
+            JsonObjectRequest saveFavouriteLocationRequest = new JsonObjectRequest(Request.Method.POST, BASE_URL+"add-to-favourites", favouriteLocationJson, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Toast.makeText(context,"Saved To Your Favourite Locations",Toast.LENGTH_LONG).show();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context,"This Location Already In Your Favourite Locations",Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String , String> headers = new HashMap<>();
+                    headers.put("Accept","application/json");
+                    headers.put("Authorization","Bearer "+context.getSharedPreferences("user", Context.MODE_PRIVATE).getString("authToken",""));
+                    return headers;
+                }
+            };
+            Volley.newRequestQueue(context).add(saveFavouriteLocationRequest);
+        }catch (JSONException e){
+            Toast.makeText(context,"Something Went Wrong",Toast.LENGTH_LONG).show();
+        }
     }
 }

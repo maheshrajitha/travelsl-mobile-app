@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FavouritesActivity"></activity>
+        <activity android:name=".CountryInfoActivity"></activity>
+        <activity android:name=".FavouritesActivity" />
         <activity android:name=".CountryActivity" />
         <activity android:name=".ViewOnMapActivity" />
         <activity android:name=".LocationActivity" />

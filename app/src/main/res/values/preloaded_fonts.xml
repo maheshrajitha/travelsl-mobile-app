@@ -3,5 +3,8 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/acme</item>
         <item>@font/atomic_age</item>
+        <item>@font/bree_serif</item>
+        <item>@font/roboto</item>
+        <item>@font/roboto_thin</item>
     </array>
 </resources>

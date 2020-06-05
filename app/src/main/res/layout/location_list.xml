@@ -20,49 +20,36 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="553dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="-1dp">
 
             <ImageView
                 android:id="@+id/locationImage"
-                android:layout_width="match_parent"
-                android:layout_height="358dp"
+                android:layout_width="173dp"
+                android:layout_height="170dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.44"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.383" />
+                app:layout_constraintVertical_bias="0.156" />
 
             <TextView
                 android:id="@+id/locationNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
                 android:text="VenueName"
                 android:textColor="@color/appBlack"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.306"
+                app:layout_constraintHorizontal_bias="0.656"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.03" />
-
-            <ImageView
-                android:id="@+id/locationIndicatorImageView"
-                android:layout_width="57dp"
-                android:layout_height="39dp"
-                android:src="@drawable/travel"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.047"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.031"
-                tools:srcCompat="@drawable/travel" />
+                app:layout_constraintVertical_bias="0.128" />
 
             <TextView
                 android:id="@+id/locationIdTextView"
@@ -72,24 +59,35 @@
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.866"
+                app:layout_constraintHorizontal_bias="0.513"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.936" />
+                app:layout_constraintVertical_bias="0.503" />
 
             <ImageButton
                 android:id="@+id/btnAddToFavourites"
-                android:layout_width="42dp"
-                android:layout_height="29dp"
-                android:scaleType="fitCenter"
+                android:layout_width="71dp"
+                android:layout_height="45dp"
                 android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/locationImage"
-                app:layout_constraintHorizontal_bias="0.043"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.567"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.865"
+                app:layout_constraintVertical_bias="0.872"
                 app:srcCompat="@drawable/ic_favorite" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="56dp"
+                android:layout_height="54dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

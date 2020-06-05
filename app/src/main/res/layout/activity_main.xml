@@ -34,26 +34,31 @@
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/shadow_edit_text"
+                android:background="@drawable/rounded_transparent_text_field"
                 android:ems="10"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/typeEmail"
                 android:inputType="textEmailAddress"
                 android:textAlignment="center"
                 android:textColor="@color/appBlack"
-                android:textColorHint="@color/appBlack" />
+                android:textColorHint="@color/appBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editTextPassword"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_margin="30dp"
-                android:background="@drawable/shadow_edit_text"
+                android:background="@drawable/rounded_transparent_text_field"
                 android:ems="10"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/typePassword"
                 android:inputType="textPassword"
                 android:textAlignment="center"
                 android:textColor="@color/appBlack"
-                android:textColorHint="@color/appBlack" />
+                android:textColorHint="@color/appBlack"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnLogin"
@@ -61,8 +66,11 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/rounded_primary_button"
+                android:fontFamily="@font/roboto"
                 android:text="@string/btnLogin"
-                android:textColor="@color/appWhite" />
+                android:textColor="@color/appWhite"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/button4"
@@ -70,7 +78,11 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/secondary_rounded_button"
-                android:text="Button" />
+                android:fontFamily="@font/roboto"
+                android:text="Sign up"
+                android:textColor="@color/appWhite"
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 

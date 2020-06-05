@@ -20,35 +20,36 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="553dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="-1dp">
 
             <ImageView
                 android:id="@+id/countryImage"
-                android:layout_width="328dp"
-                android:layout_height="358dp"
+                android:layout_width="173dp"
+                android:layout_height="170dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.489"
+                app:layout_constraintHorizontal_bias="0.018"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.348" />
+                app:layout_constraintVertical_bias="0.005" />
 
             <TextView
                 android:id="@+id/countryNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
                 android:text="Country Name"
                 android:textColor="@color/appDarkColor"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.092"
+                app:layout_constraintHorizontal_bias="0.682"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.03" />
+                app:layout_constraintVertical_bias="0.047" />
 
             <TextView
                 android:id="@+id/countryIdTextView"
@@ -63,19 +64,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.867" />
 
-            <ImageButton
-                android:id="@+id/btnCountryAddToFavourites"
-                android:layout_width="29dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="20dp"
-                android:background="@android:color/transparent"
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="56dp"
+                android:layout_height="54dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/locationImage"
-                app:layout_constraintHorizontal_bias="0.944"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.952"
+                app:layout_constraintStart_toStartOf="@+id/countryImage"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.846"
-                app:srcCompat="@drawable/ic_favorite" />
+                app:layout_constraintVertical_bias="0.37"
+                app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

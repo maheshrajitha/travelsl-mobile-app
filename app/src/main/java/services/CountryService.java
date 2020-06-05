@@ -1,6 +1,9 @@
 package services;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +14,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import dtos.CountryDto;
+import lk.nsbm.travelsl.R;
 import util.CountryRecyclerViewAdapter;
 
 public class CountryService {
@@ -55,7 +61,7 @@ public class CountryService {
                             countryDto.setPopulation(jsonObject.getLong("population"));
                             countryDtoList.add(countryDto);
                         }catch (JSONException exception){
-                            Toast.makeText(appCompatActivity,"Something Went Wrong",Toast.LENGTH_LONG);
+                            Toast.makeText(appCompatActivity,"Something Went Wrong",Toast.LENGTH_LONG).show();
                         }
                     }
                     countryRecyclerViewAdapter = new CountryRecyclerViewAdapter(appCompatActivity , countryDtoList);
@@ -77,5 +83,41 @@ public class CountryService {
             }
         };
         Volley.newRequestQueue(appCompatActivity).add(jsonArrayRequest);
+    }
+
+    public void getCountryById(String id){
+        final TextView countryName = appCompatActivity.findViewById(R.id.countryInfoName);
+        final TextView countryCurrency = appCompatActivity.findViewById(R.id.countryInfoCurrency);
+        final TextView countryPopulation = appCompatActivity.findViewById(R.id.countryInfoPopulation);
+        final ImageView countryImage = appCompatActivity.findViewById(R.id.countryInfoImage);
+        JsonObjectRequest countryByIdRequest = new JsonObjectRequest(Request.Method.GET, BASE_URL+"get-country/"+id, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    countryName.setText(response.getString("country"));
+                    Picasso.get().load(response.getString("image").replace("\"","")).into(countryImage);
+                    countryPopulation.setText(response.getLong("population")+"");
+                    countryCurrency.setText(response.getString("currency"));
+                }catch (JSONException e){
+                    Toast.makeText(appCompatActivity,"Country Not Found",Toast.LENGTH_LONG).show();
+                    appCompatActivity.finish();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(appCompatActivity,"Country Not Found",Toast.LENGTH_LONG).show();
+                appCompatActivity.finish();
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String , String> headers = new HashMap<>();
+                headers.put("Authorization","Bearer "+appCompatActivity.getSharedPreferences("user", Context.MODE_PRIVATE).getString("authToken",""));
+                headers.put("Accept","application/json");
+                return headers;
+            }
+        };
+        Volley.newRequestQueue(appCompatActivity).add(countryByIdRequest);
     }
 }

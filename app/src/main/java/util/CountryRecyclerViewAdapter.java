@@ -1,6 +1,7 @@
 package util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import dtos.CountryDto;
+import lk.nsbm.travelsl.CountryInfoActivity;
 import lk.nsbm.travelsl.R;
 
 public class CountryRecyclerViewAdapter extends RecyclerView.Adapter<CountryRecyclerViewAdapter.CountryViewHolder> {
@@ -55,15 +57,19 @@ public class CountryRecyclerViewAdapter extends RecyclerView.Adapter<CountryRecy
         private ImageView countryImageView;
         private TextView countryNameTextView;
         private TextView countryIdTextView;
-        private ImageButton addCountryFavourites;
 
-        public CountryViewHolder(@NonNull View itemView , List<CountryDto> countryDtos) {
+        public CountryViewHolder(@NonNull final View itemView , final List<CountryDto> countryDtos) {
             super(itemView);
             this.countryDtos = countryDtos;
             this.countryImageView = itemView.findViewById(R.id.countryImage);
-            addCountryFavourites = itemView.findViewById(R.id.btnCountryAddToFavourites);
             this.countryNameTextView = itemView.findViewById(R.id.countryNameTextView);
             this.countryIdTextView = itemView.findViewById(R.id.countryIdTextView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    itemView.getContext().startActivity(new Intent(itemView.getContext(), CountryInfoActivity.class).putExtra("countrId",countryDtos.get(getAdapterPosition()).getId()));
+                }
+            });
         }
 
         public ImageView getCountryImageView() {
@@ -88,14 +94,6 @@ public class CountryRecyclerViewAdapter extends RecyclerView.Adapter<CountryRecy
 
         public void setCountryIdTextView(TextView countryIdTextView) {
             this.countryIdTextView = countryIdTextView;
-        }
-
-        public ImageButton getAddCountryFavourites() {
-            return addCountryFavourites;
-        }
-
-        public void setAddCountryFavourites(ImageButton addCountryFavourites) {
-            this.addCountryFavourites = addCountryFavourites;
         }
     }
 }
